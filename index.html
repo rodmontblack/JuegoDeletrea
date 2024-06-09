@@ -14,7 +14,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: rgba(255, 255, 255, 0.8); /* Adding a white background with 80% opacity */
+            background-color: rgba(255, 255, 255, 0.8);
             position: relative;
         }
         .background-image {
@@ -25,19 +25,23 @@
             height: 100%;
             background: url('FONDO JUEGO3.png') no-repeat center center fixed;
             background-size: cover;
-            opacity: 1; /* 80% transparency */
-            z-index: -1; /* Ensure the background is behind all content */
+            opacity: 1;
+            z-index: -1;
+        }
+        .number, .category {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
         }
         .number {
-            font-size: 5rem;
-            color: #000000;
+            font-size: 7rem;
             position: absolute;
             top: 20px;
             left: 20px;
         }
         .category {
-            font-size: 3rem;
-            color: #555;
+            font-size: 4rem;
             position: absolute;
             top: 20px;
             right: 20px;
@@ -65,7 +69,7 @@
         .navigation a {
             text-decoration: none;
             color: #007bff;
-            font-size: 2rem;
+            font-size: 3rem;
             margin: 0 20px;
         }
         .navigation a.disabled {
@@ -75,31 +79,31 @@
 
         @media (max-width: 768px) {
             .number {
+                font-size: 5rem;
+            }
+            .category {
+                font-size: 3rem;
+            }
+            .word {
+                font-size: 5rem;
+            }
+            .navigation a {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .number {
                 font-size: 3rem;
             }
             .category {
                 font-size: 2rem;
             }
             .word {
-                font-size: 5rem;
-            }
-            .navigation a {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .number {
-                font-size: 2.5rem;
-            }
-            .category {
-                font-size: 1.5rem;
-            }
-            .word {
                 font-size: 4rem;
             }
             .navigation a {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -163,6 +167,20 @@
             if (currentIndex < words.length - 1) {
                 currentIndex++;
                 updateContent();
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateContent();
+                }
+            } else if (event.key === 'ArrowRight') {
+                if (currentIndex < words.length - 1) {
+                    currentIndex++;
+                    updateContent();
+                }
             }
         });
 
