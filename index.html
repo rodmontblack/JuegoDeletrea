@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabras</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+        body {
+            font-family: 'Comic Neue', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        .number {
+            font-size: 5rem;
+            color: #000000;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .category {
+            font-size: 3rem;
+            color: #555;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        .word {
+            font-size: 8rem;
+            color: #b5651d;
+            margin: 40px 0;
+        }
+        .navigation {
+            margin-top: 20px;
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+        }
+        .navigation a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 2rem;
+            margin: 0 20px;
+        }
+        .navigation a.disabled {
+            color: #cccccc;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="number" id="number"></div>
+    <div class="category" id="category"></div>
+    <div class="container">
+        <div class="word" id="word"></div>
+    </div>
+    <div class="navigation">
+        <a href="#" id="prev" class="disabled">&larr; Anterior</a>
+        <a href="#" id="next">&rarr; Siguiente</a>
+    </div>
+
+    <script>
+        const categories = [
+            {name: "Acción", words: ["antes", "creo", "dice", "dijo", "estoy", "hace", "hay", "sirve", "tengo", "tenía", "vamos", "ver"]},
+            {name: "Adverbio", words: ["casi", "cerca", "como", "cuando", "después", "detrás", "entonces", "lejos", "nunca", "siempre", "también"]},
+            {name: "Colegio", words: ["botella", "colegio", "libro", "lápiz", "matemática", "mesa", "música", "pegamento", "silla"]},
+            {name: "Conjunción", words: ["porque"]},
+            {name: "Cualidad", words: ["así", "bien", "lindo", "mucho", "muy", "más", "pequeño", "poco"]},
+            {name: "Días", words: ["domingo", "jueves", "lunes", "martes", "miércoles", "sábado", "viernes"]},
+            {name: "Estación", words: ["invierno", "otoño", "primavera", "verano"]},
+            {name: "Familia", words: ["abuelo", "familia", "hermano"]},
+            {name: "Número", words: ["cinco", "dos", "tres"]},
+            {name: "Objeto", words: ["casa", "corona", "cuaderno", "luna", "película", "regla", "tus"]},
+            {name: "Persona", words: ["ella", "gente", "yo"]},
+            {name: "Pronombre", words: ["algo", "quien"]},
+            {name: "Tiempo", words: ["ahora", "ayer", "día", "hoy", "mañana", "vez"]}
+        ];
+
+        let words = [];
+        categories.forEach(category => {
+            category.words.forEach(word => {
+                words.push({ word: word, category: category.name });
+            });
+        });
+
+        let currentIndex = 0;
+
+        function updateContent() {
+            document.getElementById('number').innerText = currentIndex + 1;
+            document.getElementById('word').innerText = words[currentIndex].word;
+            document.getElementById('category').innerText = words[currentIndex].category;
+            document.getElementById('prev').classList.toggle('disabled', currentIndex === 0);
+            document.getElementById('next').classList.toggle('disabled', currentIndex === words.length - 1);
+        }
+
+        document.getElementById('prev').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateContent();
+            }
+        });
+
+        document.getElementById('next').addEventListener('click', function(event) {
+            event.preventDefault();
+            if (currentIndex < words.length - 1) {
+                currentIndex++;
+                updateContent();
+            }
+        });
+
+        updateContent();
+    </script>
+</body>
+</html>
