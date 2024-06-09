@@ -14,9 +14,19 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: rgba(255, 255, 255, 0.8); /* Adding a white background with 80% opacity */
+            position: relative;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: url('FONDO JUEGO.png') no-repeat center center fixed;
             background-size: cover;
-            position: relative;
+            opacity: 0.8; /* 80% transparency */
+            z-index: -1; /* Ensure the background is behind all content */
         }
         .number {
             font-size: 5rem;
@@ -95,6 +105,7 @@
     </style>
 </head>
 <body>
+    <div class="background-image"></div>
     <div class="number" id="number"></div>
     <div class="category" id="category"></div>
     <div class="container">
